@@ -7,11 +7,12 @@ namespace DataLayer
 {
     public class IMDBcontext : DbContext
     {
-        const string ConnectionString = "host=localhost;db=imdb;uid=postgres;pwd=1234";
+        const string ConnectionString = "host=localhost;db=imdb;uid=postgres;pwd=Google-1234";
 
         //public DbSet<Category>? Categories { get; set; }
         public DbSet<Casting>? Casting { get; set; }
         public DbSet<Titles>? Titles { get; set; }
+        public DbSet<Professionals>? Professionals { get; set; }
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -55,9 +56,14 @@ namespace DataLayer
 
 
 
+            modelBuilder.Entity<Professionals>().ToTable("professionals");
+            modelBuilder.Entity<Professionals>().HasKey(x => new { x.ProfId });
 
-
-
+            modelBuilder.Entity<Professionals>().Property(x => x.ProfId).HasColumnName("prof_id");
+            modelBuilder.Entity<Professionals>().Property(x => x.ProfName).HasColumnName("prof_name");
+            modelBuilder.Entity<Professionals>().Property(x => x.BirthYear).HasColumnName("birth_year");
+            modelBuilder.Entity<Professionals>().Property(x => x.DeathYear).HasColumnName("death_year");
+ 
         }
     }
 }

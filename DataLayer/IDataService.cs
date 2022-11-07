@@ -6,7 +6,7 @@ namespace DataLayer
 {
     public interface IDataService
     {
-
+        IList<TitlesModel>? getCoActors(string name);
         IList<TitlesModel>? getTitles(string name);
         //IList<Category> GetCategories();
         //Category? GetCategory(int id);

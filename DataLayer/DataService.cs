@@ -16,10 +16,25 @@ namespace DataLayer
                 .Select(x => new TitlesModel
                 {
                     TitleName = x.TitleName,
-                    Poster = x.Poster,
+                    Poster = (x.Poster == null) ? "" : x.Poster
+                })
+                .ToList();      
+        }
+
+        IList<TitlesModel>? IDataService.getCoActors(string name)
+        {
+            using var db = new IMDBcontext();
+            return db.Titles
+                .Where(x => x.TitleName.Contains(name))
+                .Select(x => new TitlesModel
+                {
+                    TitleName = x.TitleName,
+                    Poster = (x.Poster == null) ? "" : x.Poster
                 })
                 .ToList();
         }
+
+
     }
 }
 
